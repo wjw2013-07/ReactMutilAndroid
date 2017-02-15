@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">原生React混合</string>
+    <string name="hello_react">hello react</string>
+    <string name="depth_component">组件深入</string>
+    <string name="lagou_user_setting_txt1">消息设置</string>
+    <string name="lagou_user_setting_txt2">清除缓存</string>
+    <string name="lagou_user_setting_txt3">关于拉勾</string>
+    <string name="lagou_user_setting_txt5">用户协议</string>
+
+</resources>

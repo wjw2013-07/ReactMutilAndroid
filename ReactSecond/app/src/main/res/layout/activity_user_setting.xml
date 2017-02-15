@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/msg_invite_no_result"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl_hello"
+        android:layout_width="match_parent"
+        android:layout_height="47.33dip"
+        android:background="@color/white"
+        android:clickable="true"
+        android:paddingLeft="13.33dip"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/hello_react"
+            android:textColor="@color/lagou_user_txt"
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_depth_component"
+        android:layout_width="match_parent"
+        android:layout_height="47.33dip"
+        android:background="@color/white"
+        android:clickable="true"
+        android:paddingLeft="13.33dip"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/depth_component"
+            android:textColor="@color/lagou_user_txt"
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_msg_set"
+        android:layout_width="match_parent"
+        android:layout_height="47.33dip"
+        android:layout_marginTop="19.33dip"
+        android:background="@color/white"
+        android:clickable="true"
+        android:paddingLeft="13.33dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/lagou_user_setting_txt1"
+            android:textColor="@color/lagou_user_txt"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.33dip"
+            android:layout_alignParentBottom="true"
+            android:background="@color/lagou_user_line"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_msg_cache"
+        android:layout_width="match_parent"
+        android:layout_height="47.33dip"
+        android:background="@color/white"
+        android:clickable="true"
+        android:paddingLeft="13.33dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/lagou_user_setting_txt2"
+            android:textColor="@color/lagou_user_txt"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.33dip"
+            android:layout_alignParentBottom="true"
+            android:background="@color/lagou_user_line"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_about_lgou"
+        android:layout_width="match_parent"
+        android:layout_height="47.33dip"
+        android:layout_marginTop="19.33dip"
+        android:background="@color/white"
+        android:clickable="true"
+        android:paddingLeft="13.33dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/lagou_user_setting_txt3"
+            android:textColor="@color/lagou_user_txt"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.33dip"
+            android:layout_alignParentBottom="true"
+            android:background="@color/lagou_user_line"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_user_rule"
+        android:layout_width="match_parent"
+        android:layout_height="47.33dip"
+        android:background="@color/white"
+        android:clickable="true"
+        android:paddingLeft="13.33dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/lagou_user_setting_txt5"
+            android:textColor="@color/lagou_user_txt"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.33dip"
+            android:layout_alignParentBottom="true"
+            android:background="@color/lagou_user_line"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
