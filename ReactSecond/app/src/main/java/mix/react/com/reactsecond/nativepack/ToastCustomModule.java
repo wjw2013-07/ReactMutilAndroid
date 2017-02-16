@@ -2,9 +2,13 @@ package mix.react.com.reactsecond.nativepack;
 
 import android.widget.Toast;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +45,19 @@ public class ToastCustomModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void show(String message, int duration){
         Toast.makeText(getReactApplicationContext(), message, duration).show();
+
+        WritableMap params = Arguments.createMap();
+        params.putString("native_to_js", "来自原生的消息");
+        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("native", params);
+
     }
 
-
+    @ReactMethod
+    public void measureLayout(Callback errorBack, Callback successBack){
+        try {
+            successBack.invoke(100, 200, 200, 200);
+        }catch (Exception e){
+            errorBack.invoke(e.getMessage());
+        }
+    }
 }

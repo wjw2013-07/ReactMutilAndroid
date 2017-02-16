@@ -11,6 +11,8 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import mix.react.com.reactsecond.nativepack.AnImagePickerReactPackage;
+import mix.react.com.reactsecond.nativepack.AnIntentReactPackage;
 import mix.react.com.reactsecond.nativepack.AnToastReactPackage;
 
 /**
@@ -30,7 +32,9 @@ public class MainApplication extends Application implements ReactApplication {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
                     new CMainReactPackage(),
-                    new AnToastReactPackage()
+                    new AnToastReactPackage(),
+                    new AnImagePickerReactPackage(),
+                    new AnIntentReactPackage()
             );
         }
     };

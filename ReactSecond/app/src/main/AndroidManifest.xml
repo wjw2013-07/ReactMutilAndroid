@@ -41,6 +41,14 @@
         android:name=".activity.ReactComponentActivity"
         android:screenOrientation="portrait"
         />
+    <activity
+        android:name=".activity.NativeLaunchedJsActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".activity.NativeLaunchedJs2Activity"
+        android:screenOrientation="portrait"
+        />
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
     </application>
 </manifest>

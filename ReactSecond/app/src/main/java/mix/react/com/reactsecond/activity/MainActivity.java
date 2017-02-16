@@ -42,7 +42,9 @@ public class MainActivity extends BaseActivity {
         if (id == R.id.rl_hello){
             startActivity(new Intent(this, ReactHelloActivity.class));
         } else if(id == R.id.rl_depth_component){
-            startActivity(new Intent(this, ReactComponentActivity.class));
+            Intent intent = new Intent(this, ReactComponentActivity.class);
+            intent.putExtra("data", "Activity传递给Js的消息：34567");
+            startActivity(intent);
         }else if (id == R.id.rl_about_lgou){
             startActivity(new Intent(this, ReactAboutLagouActivity.class));
         }
