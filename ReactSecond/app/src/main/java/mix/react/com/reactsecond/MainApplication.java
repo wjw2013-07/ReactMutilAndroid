@@ -11,6 +11,8 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import mix.react.com.reactsecond.nativepack.AnToastReactPackage;
+
 /**
  * Created by codemanwang on 2017/2/3.
  */
@@ -27,7 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-                    new CMainReactPackage()
+                    new CMainReactPackage(),
+                    new AnToastReactPackage()
             );
         }
     };

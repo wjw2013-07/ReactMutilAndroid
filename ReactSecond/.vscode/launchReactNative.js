@@ -3,7 +3,7 @@
 try {
     var path = require("path");
     var Launcher = require("C:\\Users\\Lagou\\.vscode\\extensions\\vsmobile.vscode-react-native-0.2.5\\out\\debugger\\launcher.js").Launcher;
-    new Launcher("d:\\other_learn\\React_Native\\ReactSecond", "d:\\other_learn\\React_Native\\ReactSecond").launch();
+    new Launcher("d:\\other_learn\\React_Native\\ReactMutilAndroid\\ReactSecond", "d:\\other_learn\\React_Native\\ReactMutilAndroid\\ReactSecond").launch();
 } catch (e) {
     throw new Error("Unable to launch application. Try deleting .vscode/launchReactNative.js and restarting vscode.");
 }
