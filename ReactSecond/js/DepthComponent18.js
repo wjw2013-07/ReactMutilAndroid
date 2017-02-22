@@ -54,18 +54,24 @@ var STATUS_IMGS=[
      require('../img/ic_order_status_peisong.png'),
      require('../img/ic_order_status_wancheng.png')
 ];
-
 var {height, width} = Dimensions.get('window');
+var orderStatuts = ORDER_STATUS_DATA.data;
+var HEADER_STATUS = orderStatuts[0];
+var FOOTER_STATUS = orderStatuts[orderStatuts.length-1];
+var CENTER_STATUS = orderStatuts.slice(1,orderStatuts.length-1);
 
 
 /****
- * 实现订单状态页：采用ListView直接加载五个节点的数据
+ * 实现订单状态页：给ListView添加header和footer布局实现，listview添加中间三项即可
+ * 未解决问题：undefined is an object 'data.status'
  */
-export default class DepthComponent17 extends React.Component{
+export default class DepthComponent18 extends React.Component{
 
     constructor(props){
         super(props);
         this.renderItem = this.renderItem.bind(this);
+        this.renderHeaderItem = this.renderHeaderItem.bind(this);
+        this.renderFooterItem = this.renderFooterItem.bind(this),
         this.state={
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
@@ -81,21 +87,19 @@ export default class DepthComponent17 extends React.Component{
                     renderRow={this.renderItem}
                     style={{flex: 1, marginTop: 20}}
                     onEndReachedThreshold={10}
+                    renderHeader={this.renderHeaderItem}
+                    renderFooter={this.renderFooterItem}
                 ></ListView>
         );
     }
 
     renderItem(data){
-        if(data.id == 0){
-            return (this.renderHeaderItem(data));
-        }else if(data.id == 4){
-            return (this.renderFooterItem(data));
-        }else{
+        if(data.id > 0 && data.id < 4){
             return (this.renderCenterItem(data));
         }
     }
 
-    renderHeaderItem(data){
+    renderHeaderItem(){
         return(
             <View style={{flexDirection: 'row', height: 85}}>
                 <View>
@@ -109,7 +113,7 @@ export default class DepthComponent17 extends React.Component{
                     <View style={{height: 5}}/>
                     <Image source={require('../img/ic_order_status_item_bg.png')}
                            style={{height: 65, marginLeft: 10, width: (width-60)}}>
-                           {this.renderCenterContent(data)}
+                           {this.renderCenterContent(HEADER_STATUS)}
                     </Image>
                      <View style={{height: 5}}/>
                 </View>
@@ -117,7 +121,7 @@ export default class DepthComponent17 extends React.Component{
         )
     }
 
-    renderCenterItem(data){
+    renderCenterItem(){
         return(
             <View style={{flexDirection: 'row', height: 85}}>
                 <View>
@@ -129,7 +133,7 @@ export default class DepthComponent17 extends React.Component{
                 <View>
                      <View style={{height: 5}}/>
                      <Image source={require('../img/ic_order_status_item_bg.png')} style={{height: 65, marginLeft: 10, width: (width-60)}}>
-                            {this.renderCenterContent(data)}
+                            {this.renderCenterContent(FOOTER_STATUS)}
                      </Image>
                       <View style={{height: 5}}/>
                 </View>
