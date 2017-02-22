@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
-      marginLeft: 15
+      paddingLeft: 15
   },
 
   text: {

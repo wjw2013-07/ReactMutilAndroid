@@ -12,7 +12,6 @@ import {
 
 
 // Animated内容介绍
-
 export default class DepthComponent14 extends React.Component{
 
 constructor(props: any) {

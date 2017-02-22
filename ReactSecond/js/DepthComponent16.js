@@ -29,7 +29,9 @@ class CustomButton extends React.Component {
   }
 }
 
-
+/***
+ * 电影票列表实例
+ */
 export default class DepthComponent16 extends React.Component{
 
     constructor(props){
