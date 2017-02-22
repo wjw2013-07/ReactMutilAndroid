@@ -42,12 +42,14 @@ export default class DepthComponet13 extends React.Component{
     //  }
 
     componentDidMount(){
-            NativeModules.IntentModule.dataToJs((msg) => {
-                ToastAndroid.show('Js界面：从Activity中传输过来的数据为：' + msg, ToastAndroid.SHORT);
-            },
-            (result) => {
-                ToastAndroid.show('JS界面:错误信息为:'+result,ToastAndroid.SHORT);
-            })
+
+        NativeModules.IntentModule.dataToJs((msg) => {
+            ToastAndroid.show('Js界面：从Activity中传输过来的数据为：' + msg, ToastAndroid.SHORT);
+        },
+        (result) => {
+            ToastAndroid.show('JS界面:错误信息为:'+result,ToastAndroid.SHORT);
+        })
+
     }
 
     render() {
@@ -92,7 +94,8 @@ export default class DepthComponet13 extends React.Component{
                              ToastAndroid.show('JS界面：错误信息为:' + result, ToastAndroid.SHORT);
                         }
                         )}>
-                    </CustomButton>    
+                    </CustomButton> 
+  
                 </View>
             </ScrollView>
         )

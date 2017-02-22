@@ -28,8 +28,8 @@ public class IntentModule extends ReactContextBaseJavaModule {
         return "IntentModule";
     }
 
-    /***
-     * 从JS页面跳转到原生activity   同时也可以从JS传递相关数据到原生
+    /***同时也可以从JS传递相关数据到原生
+     * 从JS页面跳转到原生activity
      * @param name
      * @param params
      */
