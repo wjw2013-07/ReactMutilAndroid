@@ -1,0 +1,57 @@
+export const COMMENT_DATA={
+    "api":"GetCommentList",
+    "v":"1.0",
+    "code":"0",
+    "msg":"success",
+    "data":[{
+        "username":"jiangqq",
+        "nickname":"张三",
+        "content":"这家店的菜还是不错的",
+        "createTime":"2016-08-22 12:34:12",
+        "icon":"",
+        "imgs":[
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"}
+        ]
+    },{
+       "username":"jiangqq",
+        "nickname":"张三",
+        "content":"这家店的菜还是不错的",
+        "createTime":"2016-08-22 12:34:12",
+        "icon":"",
+        "imgs":[
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"}
+        ]
+    },{
+       "username":"jiangqq",
+        "nickname":"张三",
+        "content":"这家店的菜还是不错的",
+        "createTime":"2016-08-22 12:34:12",
+        "icon":"",
+        "imgs":[
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+            {"imgUrl":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488443919&di=d2a2d82f21abe345c176282155c96377&imgtype=jpg&er=1&src=http%3A%2F%2Ftravel.qingdaonews.com%2Fgb%2Fimages%2Fattachement%2Fjpg%2Fsite1%2F20151207%2F001d723d74d417cf3ca00e.jpg"},
+        ]
+    }]
+}
