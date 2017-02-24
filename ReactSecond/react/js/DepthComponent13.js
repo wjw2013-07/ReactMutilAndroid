@@ -82,12 +82,12 @@ export default class DepthComponet13 extends React.Component{
 
                     <Text style={styles.text}>3 原生封装之--Js调用原生方法</Text>
                     <CustomButton text='Js调用原生方法' onPress={() => 
-                        NativeModules.IntentModule.startActivityFromJs('mix.react.com.reactsecond.activity.NativeLaunchedJsActivity', '我是来自Js传递过来的参数 123456')}>
+                        NativeModules.IntentModule.startActivityFromJs('mix.react.com.second.activity.NativeLaunchedJsActivity', '我是来自Js传递过来的参数 123456')}>
                     </CustomButton>    
 
                     <Text style={styles.text}>4 原生封装之--Js调用原生方法，并等待原生数据返回</Text>
                     <CustomButton text='Js调用原生方法，并等待原生数据返回' onPress={() => 
-                        NativeModules.IntentModule.startActivityFromJSGetResult('mix.react.com.reactsecond.activity.NativeLaunchedJs2Activity', 200, (msg) => {
+                        NativeModules.IntentModule.startActivityFromJSGetResult('mix.react.com.second.activity.NativeLaunchedJs2Activity', 200, (msg) => {
                             ToastAndroid.show('JS界面：从Activity传递过来的数据为：' + msg, ToastAndroid.SHORT);
                         },
                         (result) => {

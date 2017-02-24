@@ -4,7 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId "mix.react.com.reactsecond"
+        applicationId "mix.react.com.second"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode VERSION_CODE.toInteger()

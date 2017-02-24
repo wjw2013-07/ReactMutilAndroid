@@ -13,6 +13,7 @@ import {
     Dimensions,
     ListView,
     TouchableOpacity,
+    NativeModules,
 
 } from 'react-native';
 
@@ -168,6 +169,7 @@ export default class DepthComponent20 extends React.Component {
                     {/*标题栏*/}
                     <View style={{flexDirection: 'row', height: 48, backgroundColor: '#A0522D', alignItems: 'center'}}>
                         <TouchableOpacity
+                            onPress={() => {NativeModules.IntentModule.finshActivity()}}
                             style={{width: 48, height: 48, alignItems: 'center', justifyContent: 'center'}}>
                             <Image source={require('../img/ic_center_back.png')} style={{width: 13, height: 20}}/>
                         </TouchableOpacity>
