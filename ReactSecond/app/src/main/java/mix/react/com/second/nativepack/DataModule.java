@@ -7,7 +7,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
-import mix.react.com.second.bean.Person;
+import mix.react.com.second.bean.PersonBean;
 
 /**
  * Created by codemanwang on 2017/2/24.
@@ -31,7 +31,7 @@ public class DataModule extends ReactContextBaseJavaModule{
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Person person = new Person("wjw", 27);
+                PersonBean person = new PersonBean("wjw", 27);
                 String persons = "{\n" +
                         "\n" +
                         "    \"person\": {\n" +

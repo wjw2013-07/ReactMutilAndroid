@@ -1,10 +1,16 @@
 package mix.react.com.second.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import mix.react.com.second.Constant;
 import mix.react.com.second.R;
+import mix.react.com.second.api.HotUpdateApi;
+import mix.react.com.second.bean.BundleVersionBean;
+import mix.react.com.second.lib.listener.RequestListener;
 
 /**
  * Created by codemanwang on 2017/2/4.
@@ -29,6 +35,49 @@ public class MainActivity extends BaseActivity {
         mRelHello.setOnClickListener(this);
         mRelDepth.setOnClickListener(this);
         mRelAboutLagou.setOnClickListener(this);
+
+        HotUpdateApi.checkIsDownloadBundle(new RequestListener() {
+            @Override
+            public void onSuccess(Object responseBean) {
+                if (responseBean instanceof BundleVersionBean){
+                    BundleVersionBean bean = (BundleVersionBean) responseBean;
+                    if (bean.getBundleVersion() > Constant.BUNDLE_VERSION){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showDownloadDialog();
+                            }
+                        });
+                    }
+                }
+            }
+
+            private void showDownloadDialog() {
+                //弹出升级对话框
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("升级提示");
+                builder.setMessage("新功能升级");
+                builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.setNegativeButton("不升级", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.setCancelable(true);
+                builder.create().show();
+            }
+
+            @Override
+            public void onError(Object errorBean) {
+
+            }
+        });
     }
 
     @Override
