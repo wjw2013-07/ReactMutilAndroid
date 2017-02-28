@@ -6,8 +6,7 @@ package mix.react.com.second;
 
 public class Constant {
 
+    public final static boolean IS_DEBUG = true;
     public final static int BUNDLE_VERSION = 1;
-
-
     public final static String URL_PREFIX = "http://localhost:8080/reactsecond/";
 }

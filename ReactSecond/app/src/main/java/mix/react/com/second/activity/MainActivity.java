@@ -11,6 +11,9 @@ import mix.react.com.second.R;
 import mix.react.com.second.api.HotUpdateApi;
 import mix.react.com.second.bean.BundleVersionBean;
 import mix.react.com.second.lib.listener.RequestListener;
+import mix.react.com.second.lib.utils.DownLoadUtil;
+import mix.react.com.second.lib.utils.SpUtil;
+import mix.react.com.second.lib.utils.StoreUtil;
 
 /**
  * Created by codemanwang on 2017/2/4.
@@ -40,19 +43,20 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(Object responseBean) {
                 if (responseBean instanceof BundleVersionBean){
-                    BundleVersionBean bean = (BundleVersionBean) responseBean;
+                    final BundleVersionBean bean = (BundleVersionBean) responseBean;
                     if (bean.getBundleVersion() > Constant.BUNDLE_VERSION){
+                        SpUtil.saveString("bundle_md5", bean.getMd5());
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showDownloadDialog();
+                                showDownloadDialog(bean);
                             }
                         });
                     }
                 }
             }
 
-            private void showDownloadDialog() {
+            private void showDownloadDialog(final BundleVersionBean bean) {
                 //弹出升级对话框
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("升级提示");
@@ -60,7 +64,8 @@ public class MainActivity extends BaseActivity {
                 builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        DownLoadUtil.sysDownLoad(bean.getUrl(),
+                                StoreUtil.getBundlePath(MainActivity.this), MainActivity.this);
                     }
                 });
                 builder.setNegativeButton("不升级", new DialogInterface.OnClickListener() {

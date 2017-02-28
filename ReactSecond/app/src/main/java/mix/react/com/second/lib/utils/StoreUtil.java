@@ -1,6 +1,6 @@
 package mix.react.com.second.lib.utils;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Environment;
 
 import java.io.File;
@@ -12,30 +12,44 @@ import java.io.File;
 
 public class StoreUtil {
 
-    public static String getAvaiablePath(Activity activity){
+    public static String getAvaiablePath(Context context){
 
         String path;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-            path = Environment.getDataDirectory().getAbsolutePath() + File.separator;
+            path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
         }else {
-            path = activity.getCacheDir().getAbsolutePath() + File.separator;
+            path = context.getCacheDir().getAbsolutePath() + File.separator;
         }
 
         return path;
     }
 
-    public static String getBundlePath(Activity activity){
-        if (activity == null){
+    public static String getBundlePath(Context context){
+        if (context == null){
             return null;
         }
 
-        String path = getAvaiablePath(activity) + "bundle/";
+        String path = getAvaiablePath(context) + "bundle/";
         File file = new File(path);
         if (!file.exists()){
             file.mkdir();
         }
 
         path += "bundle.zip";
+        return path;
+    }
+
+    public static String getBundleDir(Context context){
+        if (context == null){
+            return null;
+        }
+
+        String path = getAvaiablePath(context) + "bundle/";
+        File file = new File(path);
+        if (!file.exists()){
+            file.mkdir();
+        }
+
         return path;
     }
 }

@@ -37,4 +37,6 @@ public class ReactComponentActivity extends ReactActivity {
             sQueue.add("木有回调...");
         }
     }
+
+
 }
