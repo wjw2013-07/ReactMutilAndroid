@@ -1,14 +1,21 @@
 package mix.react.com.second.lib.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.util.LinkedList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import mix.react.com.second.Constant;
+import mix.react.com.second.lib.third.diff_match_patch;
 
 /**
  * 文件相关工具类
@@ -24,7 +31,7 @@ public class FileUtil {
      * @param context
      */
     public static void decompression(String path, Context context){
-        LogUtil.LogCommon("文件校验成功，开始解压");
+        LogUtil.logMd5("文件校验成功，开始解压");
         if (TextUtils.isEmpty(path)){
             return;
         }
@@ -44,6 +51,8 @@ public class FileUtil {
                     StreamUtil.iStreamToFile(zIs, file);
                 }
             }
+
+            context.sendBroadcast(new Intent(Constant.PACK_PATCH_SUCCESS));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -62,5 +71,91 @@ public class FileUtil {
             file.delete();
         }
 
+    }
+
+    /***
+     * 根据传入的新旧文件以及生成的目标位置，生成patch文件
+     * @param oldPath
+     * @param newPath
+     * @param specifyPath
+     */
+    public static void productPatch(String oldPath, String newPath, String specifyPath){
+        if (TextUtils.isEmpty(oldPath)) {
+            return;
+        }
+        if (TextUtils.isEmpty(newPath)) {
+            return;
+        }
+        if (TextUtils.isEmpty(specifyPath)) {
+            return;
+        }
+        //读取文件，并且转换成字符串
+        String oldData = StreamUtil.getStringFromPath(oldPath);
+        String newData = StreamUtil.getStringFromPath(newPath);
+
+        diff_match_patch dmp = new diff_match_patch();
+        //对比
+        LinkedList<diff_match_patch.Diff> diffs = dmp.diff_main(oldData, newData);
+        //生成差异补丁包
+        LinkedList<diff_match_patch.Patch> patchs = dmp.patch_make(diffs);
+        //解析补丁包
+        String patchStr = dmp.patch_toText(patchs);
+        if (patchStr == null || patchStr.equals("")) {
+            return;
+        }
+
+        //存储到指定位置
+        try {
+            File file = new File(specifyPath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            StreamUtil.iByteToFile(patchStr.getBytes(), file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /***
+     * 合并patch和bundle
+     * @param bundlePath
+     * @param patchPath
+     */
+    public static void mergePatchBundle(String bundlePath, String patchPath){
+        if (TextUtils.isEmpty(bundlePath) || TextUtils.isEmpty(patchPath)){
+            return;
+        }
+        String bundleData = StreamUtil.getStringFromPath(bundlePath);
+        String patchData = StreamUtil.getStringFromPathN(patchPath);
+        if (TextUtils.isEmpty(bundleData) || TextUtils.isEmpty(patchData)){
+            return;
+        }
+        //1 初始化dmp
+        diff_match_patch dmp = new diff_match_patch();
+        //2 转换patch
+        LinkedList<diff_match_patch.Patch> patches =
+                (LinkedList<diff_match_patch.Patch>) dmp.patch_fromText(patchData);
+        //3 patch与bundle合并，生成新的bundle
+        Object[] bundleArray = dmp.patch_apply(patches, bundleData);
+        //4 保存新的bundle
+        Writer writer = null;
+        try{
+            writer = new FileWriter(bundlePath);
+            String newBundle = (String)bundleArray[0];
+            writer.write(newBundle);
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (writer != null){
+                    writer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        File file = new File(patchPath);
+        file.delete();
     }
 }

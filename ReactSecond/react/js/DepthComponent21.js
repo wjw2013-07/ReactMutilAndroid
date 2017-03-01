@@ -60,6 +60,7 @@ export default class DepthComponent21 extends React.Component{
                         })}
                         text='原生传递给js复杂数据'
                     ></ComponentButton>
+                    
                 </View>
         );
     }

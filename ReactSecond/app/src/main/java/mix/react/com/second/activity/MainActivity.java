@@ -1,7 +1,10 @@
 package mix.react.com.second.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -24,6 +27,14 @@ public class MainActivity extends BaseActivity {
     private RelativeLayout mRelHello;
     private RelativeLayout mRelDepth;
     private RelativeLayout mRelAboutLagou;
+    private BundleVersionBean mBean;
+
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            SpUtil.saveBundleVersionBean(mBean, true);
+        }
+    };
 
     @Override
     public void initView(){
@@ -31,6 +42,9 @@ public class MainActivity extends BaseActivity {
         mRelDepth = (RelativeLayout) findViewById(R.id.rl_depth_component);
         mRelAboutLagou = (RelativeLayout) findViewById(R.id.rl_about_lgou);
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.PACK_PATCH_SUCCESS);
+        registerReceiver(mReceiver, filter);
     }
 
     @Override
@@ -43,13 +57,16 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(Object responseBean) {
                 if (responseBean instanceof BundleVersionBean){
-                    final BundleVersionBean bean = (BundleVersionBean) responseBean;
-                    if (bean.getBundleVersion() > Constant.BUNDLE_VERSION){
-                        SpUtil.saveString("bundle_md5", bean.getMd5());
+                    mBean = (BundleVersionBean) responseBean;
+                    long buildVersion = SpUtil.getBundleVersion();
+                    if (buildVersion == -1){
+                        buildVersion = Constant.BUNDLE_VERSION;
+                    }
+                    if (mBean.getBundleVersion() > buildVersion){
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showDownloadDialog(bean);
+                                showDownloadDialog(mBean);
                             }
                         });
                     }
@@ -64,8 +81,9 @@ public class MainActivity extends BaseActivity {
                 builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        SpUtil.saveBundleVersionBean(mBean, false);
                         DownLoadUtil.sysDownLoad(bean.getUrl(),
-                                StoreUtil.getBundlePath(MainActivity.this), MainActivity.this);
+                                StoreUtil.getBundlePatchPath(MainActivity.this), MainActivity.this);
                     }
                 });
                 builder.setNegativeButton("不升级", new DialogInterface.OnClickListener() {
@@ -101,6 +119,14 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         }else if (id == R.id.rl_about_lgou){
             startActivity(new Intent(this, ReactAboutLagouActivity.class));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mReceiver != null){
+            unregisterReceiver(mReceiver);
         }
     }
 }

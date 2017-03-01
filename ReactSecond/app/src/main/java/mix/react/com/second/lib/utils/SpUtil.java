@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import mix.react.com.second.bean.BundleVersionBean;
+
 /**
  * Created by codemanwang on 2017/2/28.
  */
@@ -66,4 +68,31 @@ public class SpUtil {
 
         return sPreferences.getString(key, "");
     }
+
+    //Rn bundle升级相关信息存储
+    public static void saveBundleVersionBean(BundleVersionBean versionBean, boolean isSaveVersion){
+        if (versionBean == null){
+            return;
+        }
+
+        if (!TextUtils.isEmpty(versionBean.getCompleteMd5())){
+            saveString("bundle_complete_md5", versionBean.getCompleteMd5());
+        }
+        if (!TextUtils.isEmpty(versionBean.getPatchMd5())){
+            saveString("bundle_patch_md5", versionBean.getPatchMd5());
+        }
+        if (isSaveVersion){
+            saveLong("bundle_version", versionBean.getBundleVersion());
+        }
+    }
+    public static String getBundleCMd5(){
+        return getString("bundle_complete_md5");
+    }
+    public static String getBundlePMd5(){
+        return getString("bundle_patch_md5");
+    }
+    public static long getBundleVersion(){
+        return getLong("bundle_version");
+    }
+
 }

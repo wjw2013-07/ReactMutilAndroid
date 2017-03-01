@@ -1,7 +1,6 @@
 package mix.react.com.second.lib.utils;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;

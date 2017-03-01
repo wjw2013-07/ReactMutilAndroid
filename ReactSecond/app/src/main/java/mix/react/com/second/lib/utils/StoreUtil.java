@@ -24,32 +24,63 @@ public class StoreUtil {
         return path;
     }
 
+    public static String getBundleDir(Context context){
+        if (context == null){
+            return null;
+        }
+
+        String path = getAvaiablePath(context) + "lagou/bundle/";
+        File file = new File(path);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+
+        return path;
+    }
+
     public static String getBundlePath(Context context){
         if (context == null){
             return null;
         }
 
-        String path = getAvaiablePath(context) + "bundle/";
+        String path = getBundleDir(context);
         File file = new File(path);
         if (!file.exists()){
-            file.mkdir();
+            file.mkdirs();
         }
 
         path += "bundle.zip";
         return path;
     }
 
-    public static String getBundleDir(Context context){
+    public static String getBundleIndexBundle(Context context){
         if (context == null){
             return null;
         }
 
-        String path = getAvaiablePath(context) + "bundle/";
+        String path = getBundleDir(context);
         File file = new File(path);
         if (!file.exists()){
-            file.mkdir();
+            file.mkdirs();
         }
 
+        path += "hotupdate/index.android.bundle";
         return path;
     }
+
+    public static String getBundlePatchPath(Context context){
+        if (context == null){
+            return null;
+        }
+
+        String path = getBundleDir(context);
+        File file = new File(path);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+
+        path += "patch.bat";
+        return path;
+    }
+
 }

@@ -50,7 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
         @Nullable
         @Override
         protected String getJSBundleFile() {
-            String path = StoreUtil.getBundleDir(getApplicationContext()) + "index.android.bundle";
+            String path = StoreUtil.getBundleDir(getApplicationContext()) + "hotupdate/index.android.bundle";
             File file = new File(path);
             if (file != null && file.exists()){
                 return path;
