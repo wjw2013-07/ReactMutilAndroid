@@ -68,6 +68,11 @@ public class StoreUtil {
         return path;
     }
 
+    /***
+     * 初始方案，只有一个bat，未考虑图片增加
+     * @param context
+     * @return
+     */
     public static String getBundlePatchPath(Context context){
         if (context == null){
             return null;
@@ -79,7 +84,22 @@ public class StoreUtil {
             file.mkdirs();
         }
 
-        path += "patch.bat";
+        path += "patch.pat";
+        return path;
+    }
+
+    public static String getZipPath(Context context){
+        if (context == null){
+            return null;
+        }
+
+        String path = getBundleDir(context);
+        File file = new File(path);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+
+        path += "plugin_pack.zip";
         return path;
     }
 

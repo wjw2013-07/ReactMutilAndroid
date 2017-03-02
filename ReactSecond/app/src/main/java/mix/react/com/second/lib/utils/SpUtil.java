@@ -81,6 +81,9 @@ public class SpUtil {
         if (!TextUtils.isEmpty(versionBean.getPatchMd5())){
             saveString("bundle_patch_md5", versionBean.getPatchMd5());
         }
+        if (!TextUtils.isEmpty(versionBean.getZipMd5())){
+            saveString("bundle_zip_md5", versionBean.getZipMd5());
+        }
         if (isSaveVersion){
             saveLong("bundle_version", versionBean.getBundleVersion());
         }
@@ -90,6 +93,9 @@ public class SpUtil {
     }
     public static String getBundlePMd5(){
         return getString("bundle_patch_md5");
+    }
+    public static String getBundleZipMd5(){
+        return getString("bundle_zip_md5");
     }
     public static long getBundleVersion(){
         return getLong("bundle_version");

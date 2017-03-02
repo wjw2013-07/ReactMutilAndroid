@@ -2,6 +2,7 @@ package mix.react.com.second.lib.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -177,5 +178,43 @@ public class StreamUtil {
             }
         }
         return sBuilder.toString();
+    }
+
+
+    public static void moveFileToGoalDir(File file, String goalDir){
+        String imgName = file.getName();
+        File goalFile = new File(goalDir + imgName);
+        if (goalFile.exists()){
+           return;
+        }
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            goalFile.createNewFile();
+            fis = new FileInputStream(file);
+            fos = new FileOutputStream(goalFile);
+            byte[] buffer = new byte[1024];
+            int length = 0;
+            while((length = fis.read(buffer)) != -1){
+                fos.write(buffer, 0, length);
+                fos.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (fis != null){
+                    fis.close();
+                }
+
+                if (fos != null){
+                    fos.close();
+                }
+
+                file.delete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ public class BundleVersionBean extends BaseSuccess {
     private String url;
     private String completeMd5;
     private String patchMd5;
+    private String zipMd5;
 
     public int getBundleVersion() {
         return bundleVersion;
@@ -44,5 +45,13 @@ public class BundleVersionBean extends BaseSuccess {
 
     public void setPatchMd5(String patchMd5) {
         this.patchMd5 = patchMd5;
+    }
+
+    public String getZipMd5() {
+        return zipMd5;
+    }
+
+    public void setZipMd5(String zipMd5) {
+        this.zipMd5 = zipMd5;
     }
 }

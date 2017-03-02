@@ -27,14 +27,14 @@ public class CompleteReceiver extends BroadcastReceiver {
             ThreadUtil.asyncTask(new Runnable() {
                 @Override
                 public void run() {
-                    handlePatch(context);
+                    handleBundleZip(context);
                 }
             });
         }
     }
 
     /***
-     * 处理patch一系列逻辑
+     * 初始化方案  合并patch，未考虑有图片变化的情况
      * @param context
      */
     private void handlePatch(Context context) {
@@ -47,7 +47,6 @@ public class CompleteReceiver extends BroadcastReceiver {
             context.sendBroadcast(new Intent(Constant.PACK_PATCH_SUCCESS));
             return;
         }
-
 
         LogUtil.logMd5("下载patch包成功，开始patch md5校验");
         String patchPath = StoreUtil.getBundlePatchPath(context);
@@ -71,4 +70,27 @@ public class CompleteReceiver extends BroadcastReceiver {
         //FileUtil.decompression(bundlePath, context);
     }
 
+    /***
+     * 完善后方案，将pacth和图片打成zip下发到客户端
+     * @param context
+     */
+    private void handleBundleZip(Context context){
+        //先校验zip包的完整性
+        String zipPath = StoreUtil.getZipPath(context);
+        //1 首先验证客户端收到的zip文件是否合法完整
+        boolean isZipSafe = MD5Util.checkMD5(SpUtil.getBundleZipMd5(), zipPath);
+        if (!isZipSafe){
+            LogUtil.logMd5("zip文件被篡改，增量升级过程被迫中止");
+            return;
+        }
+        //2 zip校验完整，开始解压缩
+        LogUtil.logMd5("zipMd5 校验成功，开始解压缩");
+        FileUtil.decompression(zipPath, context);
+        //3 解压缩完毕，合并patch
+        handlePatch(context);
+        //4 解压缩完毕，移动图片到hotupdate/drawable-mdpi文件夹
+        LogUtil.logMd5("移动图片到hotupdate/drawable-mdpi文件夹");
+        FileUtil.movieImgToGoal(context);
+
+    }
 }

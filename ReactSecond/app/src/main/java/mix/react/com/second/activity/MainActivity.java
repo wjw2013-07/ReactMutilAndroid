@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         SpUtil.saveBundleVersionBean(mBean, false);
                         DownLoadUtil.sysDownLoad(bean.getUrl(),
-                                StoreUtil.getBundlePatchPath(MainActivity.this), MainActivity.this);
+                                StoreUtil.getZipPath(MainActivity.this), MainActivity.this);
                     }
                 });
                 builder.setNegativeButton("不升级", new DialogInterface.OnClickListener() {

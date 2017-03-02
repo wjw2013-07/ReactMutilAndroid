@@ -1,7 +1,7 @@
 import { AppRegistry } from 'react-native';
 import Hello from './react/js/Hello';
 import AboutLagou from './react/js/AboutLagou';
-import DepthComponent from './react/js/DepthComponent21';
+import DepthComponent from './react/js/DepthComponent19';
 
 AppRegistry.registerComponent('hello', () => Hello);
 AppRegistry.registerComponent('aboutlagou', () => AboutLagou);

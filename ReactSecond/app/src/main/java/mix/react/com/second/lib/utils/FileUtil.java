@@ -159,4 +159,32 @@ public class FileUtil {
         File file = new File(patchPath);
         file.delete();
     }
+
+    public static void movieImgToGoal(Context context){
+        String zipImgDir = StoreUtil.getBundleDir(context) + "img";//解压缩所得图片路径
+        String imgGoalDir = StoreUtil.getBundleDir(context) + "hotupdate/drawable-mdpi/";
+        try{
+            File zipFile = new File(zipImgDir);
+            if (!zipFile.isDirectory()){
+                return;
+            }
+            
+            File[] zipImgFiles = zipFile.listFiles();
+            if (zipImgFiles == null || zipImgFiles.length == 0){
+                return;
+            }
+            int length = zipImgFiles.length;
+            for (int i = 0; i < length; i++){
+                File file = zipImgFiles[i];
+                if (file == null || !file.exists()){
+                    continue;
+                }
+
+                StreamUtil.moveFileToGoalDir(file, imgGoalDir);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
