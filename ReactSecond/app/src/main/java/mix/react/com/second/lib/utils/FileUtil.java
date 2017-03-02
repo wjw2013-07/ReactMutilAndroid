@@ -1,7 +1,6 @@
 package mix.react.com.second.lib.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.TextUtils;
 
 import java.io.File;
@@ -14,7 +13,6 @@ import java.util.LinkedList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import mix.react.com.second.Constant;
 import mix.react.com.second.lib.third.diff_match_patch;
 
 /**
@@ -31,7 +29,6 @@ public class FileUtil {
      * @param context
      */
     public static void decompression(String path, Context context){
-        LogUtil.logMd5("文件校验成功，开始解压");
         if (TextUtils.isEmpty(path)){
             return;
         }
@@ -51,8 +48,6 @@ public class FileUtil {
                     StreamUtil.iStreamToFile(zIs, file);
                 }
             }
-
-            context.sendBroadcast(new Intent(Constant.PACK_PATCH_SUCCESS));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -90,8 +85,8 @@ public class FileUtil {
             return;
         }
         //读取文件，并且转换成字符串
-        String oldData = StreamUtil.getStringFromPath(oldPath);
-        String newData = StreamUtil.getStringFromPath(newPath);
+        String oldData = StreamUtil.getStringFromPathN(oldPath);
+        String newData = StreamUtil.getStringFromPathN(newPath);
 
         diff_match_patch dmp = new diff_match_patch();
         //对比
@@ -125,7 +120,7 @@ public class FileUtil {
         if (TextUtils.isEmpty(bundlePath) || TextUtils.isEmpty(patchPath)){
             return;
         }
-        String bundleData = StreamUtil.getStringFromPath(bundlePath);
+        String bundleData = StreamUtil.getStringFromPathN(bundlePath);
         String patchData = StreamUtil.getStringFromPathN(patchPath);
         if (TextUtils.isEmpty(bundleData) || TextUtils.isEmpty(patchData)){
             return;
@@ -142,7 +137,13 @@ public class FileUtil {
         try{
             writer = new FileWriter(bundlePath);
             String newBundle = (String)bundleArray[0];
-            writer.write(newBundle);
+            if (!TextUtils.isEmpty(newBundle)) {
+                String end = newBundle.charAt(newBundle.length() - 1) + "";
+                if (end.equals("\n")) {
+                    newBundle = newBundle.substring(0, newBundle.length() - 1);
+                }
+            }
+            writer.write(newBundle.replace("\n", System.getProperty("line.separator")));
             writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
