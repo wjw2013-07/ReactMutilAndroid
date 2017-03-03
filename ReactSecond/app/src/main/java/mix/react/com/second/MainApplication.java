@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import mix.react.com.second.lib.manager.HotupdateManager;
 import mix.react.com.second.lib.utils.SpUtil;
 import mix.react.com.second.lib.utils.StoreUtil;
 import mix.react.com.second.nativepack.AnDataReactPackage;
@@ -69,7 +70,7 @@ public class MainApplication extends Application implements ReactApplication {
         super.onCreate();
         SoLoader.init(this, false);
         SpUtil.init(getApplicationContext());
-
+        HotupdateManager.moveAssetsToGoal("hotupdate.zip", "bundle_version.json", getApplicationContext());
     }
 
 

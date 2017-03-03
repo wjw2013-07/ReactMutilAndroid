@@ -28,4 +28,13 @@ public class LogUtil {
             Log.i("md5", message);
         }
     }
+
+    public static void logHotUpdate(String message){
+        if (TextUtils.isEmpty(message)){
+            return;
+        }
+        if (Constant.IS_DEBUG){
+            Log.i("hotupdate", message);
+        }
+    }
 }

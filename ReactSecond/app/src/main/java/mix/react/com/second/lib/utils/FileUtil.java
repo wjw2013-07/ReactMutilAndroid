@@ -168,7 +168,7 @@ public class FileUtil {
             if (!zipFile.isDirectory()){
                 return;
             }
-            
+
             File[] zipImgFiles = zipFile.listFiles();
             if (zipImgFiles == null || zipImgFiles.length == 0){
                 return;
@@ -183,6 +183,7 @@ public class FileUtil {
                 StreamUtil.moveFileToGoalDir(file, imgGoalDir);
             }
 
+            FileUtil.deleteFile(zipImgDir);
         }catch (Exception e){
             e.printStackTrace();
         }

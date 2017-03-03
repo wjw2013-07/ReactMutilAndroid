@@ -1,5 +1,8 @@
 package mix.react.com.second.lib.utils;
 
+import android.content.Context;
+import android.text.TextUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -181,6 +184,11 @@ public class StreamUtil {
     }
 
 
+    /***
+     * 文件剪贴
+     * @param file
+     * @param goalDir
+     */
     public static void moveFileToGoalDir(File file, String goalDir){
         String imgName = file.getName();
         File goalFile = new File(goalDir + imgName);
@@ -217,4 +225,54 @@ public class StreamUtil {
             }
         }
     }
+
+    /***
+     * 把assets指定文件，复制到指定目录下
+     * @param fileName
+     * @param context
+     */
+    public static File moveAssetsToGoalDir(String fileName, Context context){
+        if (TextUtils.isEmpty(fileName) || context == null){
+            return null;
+        }
+
+        String goalDirStr = StoreUtil.getBundleDir(context);
+        InputStream is = null;
+        FileOutputStream fos = null;
+        File goalFile = null;
+        try{
+            File goalDirFile = new File(goalDirStr);
+            if (!goalDirFile.exists()){
+                goalDirFile.mkdirs();
+            }
+            goalFile = new File(goalDirStr + fileName);
+            if (!goalFile.exists()){
+                goalFile.createNewFile();
+            }
+            is = context.getAssets().open(fileName);
+            fos = new FileOutputStream(goalFile);
+            byte[] buffer = new byte[1024];
+            int length = 0;
+            while((length = is.read(buffer)) != -1){
+                fos.write(buffer, 0, length);
+                fos.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (is != null){
+                    is.close();
+                }
+                if (fos != null){
+                    fos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return goalFile;
+    }
+
 }

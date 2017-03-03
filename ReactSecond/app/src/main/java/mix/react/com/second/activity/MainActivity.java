@@ -45,6 +45,7 @@ public class MainActivity extends BaseActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.PACK_PATCH_SUCCESS);
         registerReceiver(mReceiver, filter);
+
     }
 
     @Override
