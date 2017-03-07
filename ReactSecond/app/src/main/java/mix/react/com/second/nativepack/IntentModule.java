@@ -28,6 +28,28 @@ public class IntentModule extends ReactContextBaseJavaModule {
         return "IntentModule";
     }
 
+    /***
+     * Activity 跳到Js页面，传输数据
+     * @param successBack
+     * @param errorBack
+     */
+    @ReactMethod
+    public void dataToJs(Callback successBack, Callback errorBack){
+        try{
+            Activity currentActivity = getCurrentActivity();
+            if (currentActivity == null){
+                return;
+            }
+            String result = currentActivity.getIntent().getStringExtra("data");
+            if (TextUtils.isEmpty(result)){
+                result = "木有数据";
+            }
+            successBack.invoke(result);
+        }catch (Exception e){
+            errorBack.invoke(e.getMessage());
+        }
+    }
+
     /***同时也可以从JS传递相关数据到原生
      * 从JS页面跳转到原生activity
      * @param name
@@ -74,28 +96,6 @@ public class IntentModule extends ReactContextBaseJavaModule {
         }catch (Exception e){
             errorBack.invoke(e.getMessage());
             e.printStackTrace();
-        }
-    }
-
-    /***
-     * Activity 跳到Js页面，传输数据
-     * @param successBack
-     * @param errorBack
-     */
-    @ReactMethod
-    public void dataToJs(Callback successBack, Callback errorBack){
-        try{
-            Activity currentActivity = getCurrentActivity();
-            if (currentActivity == null){
-                return;
-            }
-            String result = currentActivity.getIntent().getStringExtra("data");
-            if (TextUtils.isEmpty(result)){
-                result = "木有数据";
-            }
-            successBack.invoke(result);
-        }catch (Exception e){
-            errorBack.invoke(e.getMessage());
         }
     }
 

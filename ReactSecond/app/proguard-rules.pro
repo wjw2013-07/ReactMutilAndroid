@@ -16,10 +16,22 @@
 #   public *;
 #}
 
--keep class com.google.android.gms.** { *; }
--dontwarn com.google.android.gms.
-
--keep class com.tencent.mm.sdk.** {
-   *;
+-keep class mix.react.com.second.nativepack.**{
+    *;
 }
 
+-dontwarn java.nio.file.*
+-dontobfuscate
+-ignorewarnings
+
+#react-native
+-keep class com.facebook.** { *; }
+-keep interface com.facebook.** { *; }
+-dontwarn com.facebook.**
+
+# okhttp
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**

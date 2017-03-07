@@ -44,9 +44,9 @@ android {
         release {
             signingConfig signingConfigs.release
             if (needProguard == "1"){
-//                minifyEnabled true
+                minifyEnabled true
                 zipAlignEnabled true
-//                proguardFiles getDefaultProguardFile("proguard-android.txt"), 'proguar-rules.pro'
+                proguardFiles getDefaultProguardFile("proguard-android.txt"), 'proguard-rules.pro'
                 shrinkResources true
             }else {
                 minifyEnabled false

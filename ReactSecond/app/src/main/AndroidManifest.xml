@@ -34,10 +34,6 @@
         android:screenOrientation="portrait"
         />
     <activity
-        android:name=".activity.ReactHelloActivity"
-        android:screenOrientation="portrait"
-        />
-    <activity
         android:name=".activity.ReactComponentActivity"
         android:screenOrientation="portrait"
         />
@@ -47,6 +43,22 @@
         />
     <activity
         android:name=".activity.NativeLaunchedJs2Activity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".activity.UserProtoclActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".activity.MovieListActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".activity.BusinessManDetailActivity"
+        android:screenOrientation="portrait"
+        />
+    <activity
+        android:name=".activity.ChancePlusActivity"
         android:screenOrientation="portrait"
         />
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>

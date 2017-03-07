@@ -24,9 +24,13 @@ import mix.react.com.second.lib.utils.StoreUtil;
 
 public class MainActivity extends BaseActivity {
 
-    private RelativeLayout mRelHello;
+    private RelativeLayout mRelChancePlus;
     private RelativeLayout mRelDepth;
+    private RelativeLayout mRelMovieList;
+    private RelativeLayout mRelBusinessmanDeail;
     private RelativeLayout mRelAboutLagou;
+    private RelativeLayout mRelUserProtocl;
+
     private BundleVersionBean mBean;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -38,9 +42,12 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView(){
-        mRelHello = (RelativeLayout) findViewById(R.id.rl_hello);
+        mRelChancePlus = (RelativeLayout) findViewById(R.id.rl_chance_plus);
         mRelDepth = (RelativeLayout) findViewById(R.id.rl_depth_component);
+        mRelMovieList = (RelativeLayout) findViewById(R.id.rl_movie_list);
+        mRelBusinessmanDeail = (RelativeLayout) findViewById(R.id.rl_busninessman_detail);
         mRelAboutLagou = (RelativeLayout) findViewById(R.id.rl_about_lgou);
+        mRelUserProtocl = (RelativeLayout) findViewById(R.id.rl_user_protocl);
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.PACK_PATCH_SUCCESS);
@@ -50,9 +57,12 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        mRelHello.setOnClickListener(this);
+        mRelChancePlus.setOnClickListener(this);
         mRelDepth.setOnClickListener(this);
+        mRelMovieList.setOnClickListener(this);
+        mRelBusinessmanDeail.setOnClickListener(this);
         mRelAboutLagou.setOnClickListener(this);
+        mRelUserProtocl.setOnClickListener(this);
 
         HotUpdateApi.checkIsDownloadBundle(new RequestListener() {
             @Override
@@ -112,14 +122,20 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.rl_hello){
-            startActivity(new Intent(this, ReactHelloActivity.class));
-        } else if(id == R.id.rl_depth_component){
+        if(id == R.id.rl_depth_component){
             Intent intent = new Intent(this, ReactComponentActivity.class);
             intent.putExtra("data", "Activity传递给Js的消息：34567");
             startActivity(intent);
+        }else if (id == R.id.rl_chance_plus){
+            startActivity(new Intent(this, ChancePlusActivity.class));
         }else if (id == R.id.rl_about_lgou){
             startActivity(new Intent(this, ReactAboutLagouActivity.class));
+        }else if (id == R.id.rl_user_protocl){
+            startActivity(new Intent(this, UserProtoclActivity.class));
+        }else if (id == R.id.rl_movie_list){
+            startActivity(new Intent(this, MovieListActivity.class));
+        }else if (id == R.id.rl_busninessman_detail){
+            startActivity(new Intent(this, BusinessManDetailActivity.class));
         }
     }
 

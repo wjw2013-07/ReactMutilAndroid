@@ -5,19 +5,27 @@ import {
       StyleSheet, 
       View,
       Text,
-      Image
+      Image,
+      TouchableOpacity,
+      NativeModules,
+
  } from 'react-native';
 
 export default class AboutLagou extends React.Component {
     render(){
         return (
             <View style={styles.container}>
-                
                <View style={styles.topContainer}>
-                 <Image style={styles.imageBack} source={require('../img/iconback.png')}/>
-                 <View style={styles.topTitleContainer}>
-                    <Text style={styles.topTitle}>关于拉勾</Text>
-                 </View>
+                    <TouchableOpacity 
+                        style={{width: 50, alignItems: 'center', alignSelf: 'center'}}
+                        onPress={() => NativeModules.IntentModule.finshActivity()}
+                        >
+                        <Image style={styles.imageBack} source={require('../img/iconback.png')}/>
+                    </TouchableOpacity>
+                    <View style={styles.topTitleContainer}>
+                        <Text style={styles.topTitle}>关于拉勾</Text>
+                    </View>
+                    <View style={{width: 50}}></View>
                </View>
 
                <View style={styles.line}></View>
@@ -25,7 +33,7 @@ export default class AboutLagou extends React.Component {
                <View style={styles.contentIconContainer}>
                     <Image style={styles.contentIcon} source={require('../img/iconlagouman.png')} />
                </View>
-                <Text style={styles.contentUp}>每一次拉勾，都是对未来的约定</Text>
+                <Text style={styles.contentUp}>每一次<Text style={{color:'#00b38a', fontSize: 16}}>拉勾</Text>，都是对未来的约定</Text>
                 <Text style={styles.contentDown}>努力工作，便是履约</Text>
                 <Text style={styles.contentBottomVersion}>当前版本  3.3.1</Text>
                 <Text style={styles.contentBottomUrl}>www.lagou.com</Text>
@@ -46,20 +54,19 @@ const styles = StyleSheet.create({
     },
 
     imageBack: {
-        margin: 10,
         width: 20,
         height: 20
     },
 
     topTitleContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center'    
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'    
     },
 
     topTitle: {
-        margin: 10,
         fontSize: 17,
-        textAlign: 'center'
+        textAlign: 'center',
     },
 
     line: {
@@ -75,11 +82,11 @@ const styles = StyleSheet.create({
     },
 
     contentIcon: {
-        width: 240,
-        height: 240
+        width: 230,
+        height: 230
     },
 
-     contentUp: {
+     contentUp: { 
         marginTop: 50,
         fontSize: 15,
         textAlign: 'center'
@@ -87,8 +94,9 @@ const styles = StyleSheet.create({
 
   contentDown: {
         marginTop: 10,
-        fontSize: 16,
-        textAlign: 'center'
+        fontSize: 17,
+        textAlign: 'center',
+        fontWeight: 'bold'
     },
 
   contentBottomVersion: {
@@ -99,6 +107,7 @@ const styles = StyleSheet.create({
     contentBottomUrl: {
         marginTop: 1,
         fontSize: 13,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#999999'
     },
 })
