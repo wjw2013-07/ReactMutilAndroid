@@ -11,4 +11,4 @@ AppRegistry.registerComponent('movielist', () => MovieListComponent);
 AppRegistry.registerComponent('businessmandetail', () => BusinessManDetailComponent);
 AppRegistry.registerComponent('aboutlagou', () => AboutLagou);
 AppRegistry.registerComponent('userprotocl', () => UserProtocl);
-AppRegistry.registerComponent('depthcomponent', () => DepthComponent);
+AppRegistry.registerComponent('depthcomponent', () => DepthComponent); 

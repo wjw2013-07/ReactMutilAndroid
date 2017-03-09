@@ -10,11 +10,11 @@ import {
       TouchableOpacity,
       NativeModules,
       ListView,
-      
+      ToastAndroid,
+
  } from 'react-native';
 
-const  SHIELD_COMPANY = {
-    "data":[
+var rows = [
         {"name": "A", "id": 1},
         {"name": "B", "id": 2},
         {"name": "C", "id": 3},
@@ -23,18 +23,24 @@ const  SHIELD_COMPANY = {
         {"name": "F", "id": 6},
         {"name": "G", "id": 7},
        
-    ] 
-};
+]; 
+var ds = new ListView.DataSource({  
+    rowHasChanged: (r1, r2) => {  
+        r1 !== r2  
+    }  
+});  
+
  export default class ChancePlusComponent extends React.Component {
 
-    constructor(){
+      constructor(){
         super();
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state={
-            dataSource: ds.cloneWithRows(SHIELD_COMPANY.data),
+            dataSource: ds.cloneWithRows(rows),
 
         }
     }
+  
+
     renderHeaderView(){
         return(
             <View style={{backgroundColor: '#ffffff'}}>
@@ -63,18 +69,29 @@ const  SHIELD_COMPANY = {
         )
     } 
 
-    renderItem(data){
+    renderItem(data, sectionID, rowID){
         return(
             <View style={{backgroundColor: '#ffffff'}}>
                 <View style={{height: 45, marginLeft: 40, marginRight: 40, marginTop: 13, flexDirection: 'row', alignItems: 'center', backgroundColor: '#ffffff', borderColor: '#cccccc', borderWidth: 0.5, borderRadius: 3}}>
                     <Text style={{fontSize: 15, color: '#999999', flex: 1, textAlign: 'center'}}>{data.name}</Text>
-                    <Image source={require('../img/filter_del.png')} style={{width: 15, height: 15, marginRight: 10}}></Image>
+                    <TouchableWithoutFeedback
+                        style={{width: 45, height: 45, alignItems: 'center'}}
+                        onPress={() => this.removeClickItem(rowID)}
+                    >
+                        <Image source={require('../img/filter_del.png')} style={{width: 15, height: 15, marginRight: 10}}></Image>
+                    </TouchableWithoutFeedback>
                 </View> 
             </View>
             
         )
     }
 
+    removeClickItem(rowID){
+        ToastAndroid.show(rowID + "", ToastAndroid.SHORT);
+        delete rows[rowID];
+        this.setState({dataSource: ds.cloneWithRows(rows)})  
+
+    }
     renderFooter(){
         return( 
             <View style={{backgroundColor: '#ffffff'}}>
@@ -113,7 +130,7 @@ const  SHIELD_COMPANY = {
                <ListView
                     style={{flex:1, backgroundColor: '#f0f1f5'}}
                     dataSource={this.state.dataSource}
-                    renderRow={this.renderItem}
+                    renderRow={this.renderItem.bind(this)}
                     renderHeader={this.renderHeaderView}
                     renderFooter={this.renderFooter}
                >
@@ -154,40 +171,4 @@ const styles = StyleSheet.create({
         backgroundColor: "#cccccc"     
     },
 
-    contentIconContainer: {
-        marginTop: 80,
-        height: 240,   
-        flexDirection: 'row',
-        justifyContent: 'center'
-    },
-
-    contentIcon: {
-        width: 230,
-        height: 230
-    },
-
-     contentUp: { 
-        marginTop: 50,
-        fontSize: 15,
-        textAlign: 'center'
-    },
-
-  contentDown: {
-        marginTop: 10,
-        fontSize: 17,
-        textAlign: 'center',
-        fontWeight: 'bold'
-    },
-
-  contentBottomVersion: {
-        marginTop: 100,
-        fontSize: 16,
-        textAlign: 'center'
-    },
-    contentBottomUrl: {
-        marginTop: 1,
-        fontSize: 13,
-        textAlign: 'center',
-        color: '#999999'
-    },
 });
