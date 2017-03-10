@@ -92,6 +92,7 @@ public class MainActivity extends BaseActivity {
                 builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Constant.mDownloadBundle = 0;
                         SpUtil.saveBundleVersionBean(mBean, false);
                         DownLoadUtil.sysDownLoad(bean.getUrl(),
                                 StoreUtil.getZipPath(MainActivity.this), MainActivity.this);

@@ -68,6 +68,21 @@ public class StoreUtil {
         return path;
     }
 
+    public static String getBundleTempBundle(Context context){
+        if (context == null){
+            return null;
+        }
+
+        String path = getBundleDir(context);
+        File file = new File(path);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+
+        path += "hotupdate/temp.bundle";
+        return path;
+    }
+
     /***
      * 初始方案，只有一个bat，未考虑图片增加
      * @param context

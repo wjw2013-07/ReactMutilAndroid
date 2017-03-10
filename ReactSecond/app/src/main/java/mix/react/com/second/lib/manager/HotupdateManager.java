@@ -81,6 +81,7 @@ public class HotupdateManager {
     public static void handlePatch(Context context) {
         //先进行MD5校验，如果已经合并过，便不再合并
         String bundlePath = StoreUtil.getBundleIndexBundle(context);
+        String tempBundlePath = StoreUtil.getBundleTempBundle(context);
         boolean isPreBundleSafe = MD5Util.checkMD5(SpUtil.getBundleCMd5(), bundlePath);
         if (isPreBundleSafe){
             LogUtil.logHotUpdate("经过MD5校验已经合并，直接跳过执行");
@@ -96,16 +97,17 @@ public class HotupdateManager {
             FileUtil.deleteFile(patchPath);
             return;
         }
-        LogUtil.logHotUpdate("patch md5 校验成功，开始合并");
-        FileUtil.mergePatchBundle(bundlePath, patchPath);
-        LogUtil.logHotUpdate("bundle patch合并成功，开始校验");
-        boolean isBundleSafe = MD5Util.checkMD5(SpUtil.getBundleCMd5(), bundlePath);
+        LogUtil.logHotUpdate("patch md5 校验成功，开始合并为临时的tempBundle，防止合并后出错，回退到原始版本");
+        FileUtil.mergePatchBundle(bundlePath, patchPath, tempBundlePath);
+        LogUtil.logHotUpdate("tempBundle patch合并成功，开始校验");
+        boolean isBundleSafe = MD5Util.checkMD5(SpUtil.getBundleCMd5(), tempBundlePath);
         if (!isBundleSafe){
-            LogUtil.logHotUpdate("合并的新bundle有问题");
-            FileUtil.deleteFile(patchPath);
+            LogUtil.logHotUpdate("合并的新bundle有问题, 删除临时合并的tempBundle");
+            FileUtil.deleteFile(tempBundlePath);
             return;
         }
-        LogUtil.logHotUpdate("合并的bundle校验成功");
+        LogUtil.logHotUpdate("合并的bundle校验成功，开始最后一步重命名为index.android.bundle");
+        FileUtil.reName(tempBundlePath, bundlePath);
         context.sendBroadcast(new Intent(Constant.PACK_PATCH_SUCCESS));
     }
 

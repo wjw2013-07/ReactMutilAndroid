@@ -12,4 +12,6 @@ public class Constant {
 
     public final static String URL_PREFIX = "http://localhost:8080/reactsecond/";
 
+    public static int mDownloadBundle = 0;
+
 }

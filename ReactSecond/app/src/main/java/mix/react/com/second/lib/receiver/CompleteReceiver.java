@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import mix.react.com.second.Constant;
 import mix.react.com.second.lib.manager.HotupdateManager;
 import mix.react.com.second.lib.utils.LogUtil;
 import mix.react.com.second.lib.utils.SpUtil;
@@ -20,7 +21,10 @@ public class CompleteReceiver extends BroadcastReceiver {
         long completeId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -2);
         LogUtil.logCommon("下载完成");
         if (completeId == SpUtil.getLong("downloadId")){
-            HotupdateManager.handleBundleZip(context);
+            if (Constant.mDownloadBundle++ == 0){
+                //防止多次执行
+                HotupdateManager.handleBundleZip(context);
+            }
         }
     }
 

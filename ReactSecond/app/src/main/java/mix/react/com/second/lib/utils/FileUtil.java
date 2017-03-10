@@ -3,17 +3,21 @@ package mix.react.com.second.lib.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.facebook.common.file.FileUtils;
+import com.nothome.delta.Delta;
+import com.nothome.delta.DiffWriter;
+import com.nothome.delta.GDiffPatcher;
+import com.nothome.delta.GDiffWriter;
+
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Writer;
-import java.util.LinkedList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import mix.react.com.second.lib.third.diff_match_patch;
 
 /**
  * 文件相关工具类
@@ -44,6 +48,11 @@ public class FileUtil {
                     folder.mkdirs();
                 }else {
                     File file = new File(StoreUtil.getBundleDir(context) + File.separator + szName);
+                    String parentPath = file.getParent();
+                    File dir = new File(parentPath);
+                    if (!dir.exists()){
+                        dir.mkdirs();
+                    }
                     file.createNewFile();
                     StreamUtil.iStreamToFile(zIs, file);
                 }
@@ -84,29 +93,25 @@ public class FileUtil {
         if (TextUtils.isEmpty(specifyPath)) {
             return;
         }
-        //读取文件，并且转换成字符串
-        String oldData = StreamUtil.getStringFromPathN(oldPath);
-        String newData = StreamUtil.getStringFromPathN(newPath);
 
-        diff_match_patch dmp = new diff_match_patch();
-        //对比
-        LinkedList<diff_match_patch.Diff> diffs = dmp.diff_main(oldData, newData);
-        //生成差异补丁包
-        LinkedList<diff_match_patch.Patch> patchs = dmp.patch_make(diffs);
-        //解析补丁包
-        String patchStr = dmp.patch_toText(patchs);
-        if (patchStr == null || patchStr.equals("")) {
-            return;
-        }
-
-        //存储到指定位置
         try {
-            File file = new File(specifyPath);
-            if (!file.exists()) {
-                file.createNewFile();
+            DiffWriter output = null;
+            File sourceFile = null;
+            File targetFile = null;
+            sourceFile = new File(oldPath);
+            targetFile = new File(newPath);
+            output = new GDiffWriter(new DataOutputStream(
+                    new BufferedOutputStream(new FileOutputStream(new File(
+                            specifyPath)))));
+            if (sourceFile.length() > Integer.MAX_VALUE
+                    || targetFile.length() > Integer.MAX_VALUE) {
+                System.err.println("source or target is too large, max length is "
+                                + Integer.MAX_VALUE);
+                System.err.println("aborting..");
             }
-            StreamUtil.iByteToFile(patchStr.getBytes(), file);
-        } catch (IOException e) {
+            Delta d = new Delta();
+            d.compute(sourceFile, targetFile, output);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -116,45 +121,17 @@ public class FileUtil {
      * @param bundlePath
      * @param patchPath
      */
-    public static void mergePatchBundle(String bundlePath, String patchPath){
+    public static void mergePatchBundle(String bundlePath, String patchPath, String newPath){
         if (TextUtils.isEmpty(bundlePath) || TextUtils.isEmpty(patchPath)){
             return;
         }
-        String bundleData = StreamUtil.getStringFromPathN(bundlePath);
-        String patchData = StreamUtil.getStringFromPathN(patchPath);
-        if (TextUtils.isEmpty(bundleData) || TextUtils.isEmpty(patchData)){
-            return;
-        }
-        //1 初始化dmp
-        diff_match_patch dmp = new diff_match_patch();
-        //2 转换patch
-        LinkedList<diff_match_patch.Patch> patches =
-                (LinkedList<diff_match_patch.Patch>) dmp.patch_fromText(patchData);
-        //3 patch与bundle合并，生成新的bundle
-        Object[] bundleArray = dmp.patch_apply(patches, bundleData);
-        //4 保存新的bundle
-        Writer writer = null;
-        try{
-            writer = new FileWriter(bundlePath);
-            String newBundle = (String)bundleArray[0];
-            if (!TextUtils.isEmpty(newBundle)) {
-                String end = newBundle.charAt(newBundle.length() - 1) + "";
-                if (end.equals("\n")) {
-                    newBundle = newBundle.substring(0, newBundle.length() - 1);
-                }
-            }
-            writer.write(newBundle.replace("\n", System.getProperty("line.separator")));
-            writer.flush();
-        } catch (IOException e) {
+        try {
+            GDiffPatcher patcher = new GDiffPatcher();
+            File deffFile = new File(patchPath);
+            File updatedFile = new File(newPath);
+            patcher.patch(new File(bundlePath), deffFile, updatedFile);
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            try {
-                if (writer != null){
-                    writer.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         File file = new File(patchPath);
         file.delete();
@@ -185,6 +162,14 @@ public class FileUtil {
 
             FileUtil.deleteFile(zipImgDir);
         }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void reName(String source, String dest){
+        try{
+            FileUtils.rename(new File(source), new File(dest));
+        } catch (FileUtils.RenameException e) {
             e.printStackTrace();
         }
     }
